@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio da MORGANA 🎀</title>
+
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      background: url("./7eedd76e176fe43f9e4f946ad77cffb9.png") no-repeat center center fixed; /* 🔥 Troque aqui a imagem de fundo do site */
+      background-size: cover;
+      color: #090a0c;
+    }
+
+    /* -------- LOGIN / REGISTRO -------- */
+    #login {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      /* ← Troque o caminho abaixo para a imagem de fundo do login:
+         Ex.: url("./imagens/login-fundo.png")  */
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                  url("./7eedd76e176fe43f9e4f946ad77cffb9.png") no-repeat center center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    #login form {
+      background: #d400ff65;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      color: #fff;
+      width: 320px;
+    }
+    #login input {
+      width: 100%; padding: 12px;
+      margin: 10px 0;
+      border-radius: 20px;
+      border: 20px;
+    }
+    #login button {
+      padding: 12px;
+      width: 100%;
+      border: 20px;
+      border-radius: 20px;
+      background: #7700ff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #login a {
+      display: block;
+      margin-top: 10px;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* -------- MENU LATERAL (DIREITA) -------- */
+    .sidebar {
+      height: 100vh;
+      width: 230px;
+      position: fixed;
+      top: 0; right: 0;
+      background: #7700ff;
+      padding-top: 40px;
+      transition: 0.5s;
+      overflow: hidden;
+      z-index: 1000;
+    }
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      text-decoration: none;
+      font-size: 16px;
+      color: #f1f5f9;
+      transition: 0.2s;
+    }
+    .sidebar a:hover { background: #334155; }
+    .sidebar i { margin-right: 10px; }
+
+    .sidebar.close { width: 70px; }
+    .sidebar.close a span { display: none; }
+
+    .toggle-btn {
+      position: fixed;
+      top: 15px;
+      right: 250px;
+      font-size: 26px;
+      cursor: pointer;
+      background: #7700ff;
+      padding: 5px 10px;
+      border-radius: 8px;
+      z-index: 1100;
+    }
+    .sidebar.close ~ .toggle-btn { right: 80px; }
+
+    .content {
+      margin-right: 250px;
+      padding: 20px;
+      transition: 0.3s;
+    }
+    .sidebar.close ~ .content { margin-right: 90px; }
+
+    /* -------- TÍTULOS -------- */
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      background: rgb(183, 0, 255);
+      border-radius: 1000px;
+      padding: 10px;
+      color: black;
+      box-shadow: 10px 10px 10px;
+    }
+
+    /* -------- GALERIA -------- */
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      margin: 40px auto;
+      max-width: 1000px;
+    }
+    .galeria img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .galeria img:hover { transform: scale(2.0); }
+
+    /* -------- FEEDBACK -------- */
+    #feedback {
+      background: rgba(98, 0, 255, 0.384);
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      margin: 60px auto;
+      max-width: 5000px;
+      text-align: center;
+    }
+    #feedback h2 { margin-bottom: 15px; color: #000000; }
+    #feedback input, #feedback textarea {
+      width: 100%;
+      margin: 20px 0;
+      padding: 17px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 10px 10px 10px;
+    }
+    #feedback button {
+      margin: 20px 0;
+      background: #7700ff;
+      color: rgb(0, 0, 0);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* -------- CONTATOS -------- */
+    #contato {
+      color: #d400ff;
+      text-align: center;
+      font-size: 20px;
+      margin: 50px auto;
+    }
+    #contato a {
+      margin: 10px;
+      font-size: 50px;
+      color: #000000;
+      transition: 0.3s;
+    }
+    #contato a:hover { color: #d400ff; }
+
+    /* -------- PAGAMENTOS -------- */
+    #pagamentos {
+      text-align: center;
+      margin: 50px auto;
+    }
+    #qrcode { margin-top: 20px; }
+
+    .foto-principal {
+      display: block;
+      margin: 0 auto;
+      max-width: 200px;
+      height: auto;
+      padding: 1px;
+      border-radius: 1000px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+
+    .feedbacks {
+      background: rgba(98, 0, 255, 0.8); /* fundo escuro */
+      color: white;
+      padding: 10px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .feedbacks h2 {
+      margin-bottom: 20px;
+    }
+
+    .feedback {
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    .feedback span {
+      display: block;
+      margin-top: 5px;
+      font-size: 14px;
+      color: #000000;
+    }
+  </style>
+</head>
+<body>
+
+   <!-- LOGIN -->
+  <div id="login">
+    <form id="formLogin">
+      <h2>🔒 Login</h2>
+      <input type="text" id="user" placeholder="Usuário" required>
+      <input type="password" id="pass" placeholder="Senha" required>
+      <button type="submit">Entrar</button>
+      <a id="showRegister">Fazer Registro</a>
+    </form>
+
+    <form id="formRegister" style="display:none;">
+      <h2>📝 Registrar</h2>
+      <input type="text" id="newUser" placeholder="Novo usuário" required>
+      <input type="password" id="newPass" placeholder="Nova senha" required>
+      <button type="submit">Registrar</button>
+      <a id="showLogin">Já tenho conta</a>
+    </form>
+  </div>
+
+  <!-- MENU -->
+  <div class="sidebar" id="sidebar">
+    <a href="#inicio"><i class="fa fa-home"></i><span>Início</span></a>
+    <a href="#galeria"><i class="fa fa-image"></i><span>Galeria</span></a>
+    <a href="#galeria-cordoes"><i class="fa fa-gem"></i><span>Cordões</span></a>
+    <a href="#feedback"><i class="fa fa-comments"></i><span>Feedback</span></a>
+    <a href="#contato"><i class="fa fa-phone"></i><span>Contato</span></a>
+  </div>
+  <span class="toggle-btn" onclick="toggleMenu()">☰</span>
+
+  <!-- CONTEÚDO -->
+  <div class="content">
+    <h1 id="inicio">Studio da MORGANA 🎀</h1>
+
+    <img src="./3db384b605230acf119abe7ea9dad108.png" class="foto-principal" alt="Logo">
+
+    <h1 id="galeria">Galeria</h1>
+    <div class="galeria">
+      <img src="imagens/DROP_CAMISETA_FEM_2.png" alt="Foto 1">
+      <img src="imagens/DROP_CAMISETA_FEM.png" alt="Foto 2">
+    </div>
+    <div class="galeria">
+      <img src="imagens/JAQUETA_C_BETO.png" alt="Foto 3">
+      <img src="imagens/JAQUETA_BETO_F.png" alt="Foto 4">
+      <img src="imagens/FRENTE_7D.png" alt="Foto 5">
+      <img src="imagens/COSTA_7D.png" alt="Foto 6">
+      <img src="imagens/00_portufal_abt.png" alt="Foto 6">
+      <img src="imagens/costas_bat_portugal.png" alt="Foto 6">
+      <img src="imagens/BETO_CALCA_FFFFF_S.png" alt="Foto 6">
+      <img src="imagens/BETO_CALCA_FFFFF.png" alt="Foto 6">
+      <img src="imagens/A_F.png" alt="Foto 6">
+      <img src="imagens/A_C.png" alt="Foto 6">
+      <img src="imagens/c_c.png" alt="Foto 6">
+      <img src="imagens/caca_l.png" alt="Foto 6">
+      <img src="imagens/CALCA_XAOLIM.png" alt="Foto 6">
+      <img src="imagens/CALCA_XAOLIM_VVVVV.png" alt="Foto 6">
+      <img src="imagens/ELITE_PSICO_d.png" alt="Foto 6">
+      <img src="imagens/ELITE_PSICO_c.png" alt="Foto 6">
+      <img src="imagens/fcff00ccc.png" alt="Foto 6">
+      <img src="imagens/Camisa_MAAAAAAAAAAAAAA.png" alt="Foto 6">
+      <img src="imagens/SHORT_IZYYNHA_F.png" alt="Foto 6">
+      <img src="imagens/YZIINHA_C.png" alt="Foto 6">
+      <img src="imagens/NG.png" alt="Foto 6">
+      <img src="imagens/MN.png" alt="Foto 6">
+      <img src="imagens/g_f.png" alt="Foto 6">
+      <img src="imagens/g_c.png" alt="Foto 6">
+    </div>
+
+    <h1 id="galeria-cordoes">Galeria de Cordões</h1>
+<div class="galeria">
+  <img src="cordoes/CCCCX.png" alt="Cordão 1">
+  <img src="cordoes/PSICO_O.png" alt="Cordão 2">
+</div>
+<div class="galeria">
+  <img src="cordoes/CORINMGA_F.png" alt="Cordão 3">
+  <img src="cordoes/corrente_obj_coringa_DD.png" alt="Cordão 4">
+  <img src="cordoes/scscscscscsc.png" alt="Cordão 5">
+  <img src="cordoes/dsds.png" alt="Cordão 6">
+</div>
+
+
+    <h1 id="inicio">📩 Envie seu Feedback</h1>
+
+    <!-- Feedback -->
+    <section id="feedback">
+      <h2>Fale oque acha sobre meu trabalho</h2>
+      <form id="formFeedback">
+        <input type="text" id="nome" placeholder="Seu nome" required>
+        <textarea id="mensagem" placeholder="Sua mensagem..." rows="5" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+      <p id="resposta"></p>
+    </section>
+
+    <!-- Lista de feedbacks (estática) -->
+    <section class="feedbacks">
+      <h2>Feedbacks dos clientes 💬</h2>
+      <div class="feedback">
+        <p>"Morgana e exelente, super recomendo!"</p>
+        <span></span>
+      </div>
+      <div class="feedback">
+        <p>"Morg eu voltarei mais vezes."</p>
+        <span></span>
+      </div>
+      <div class="feedback">
+        <p>"O site a dona sao perfeitos!"</p>
+        <span></span>
+      </div>
+    </section>
+
+    <!-- Contatos -->
+    <section id="contato">
+      <h2>📱 Contatos</h2>
+      <!-- WhatsApp (exemplo) -->
+      <a href="https://wa.me/559181287705" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <!-- Discord -->
+      <a href="https://discord.gg/dxsPV24ruA" target="_blank">
+        <i class="fab fa-discord"></i>
+      </a>
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@morgana_studio?is_from_webapp=1&sender_device=pc" target="_blank">
+        <i class="fab fa-tiktok"></i>
+      </a>
+    </section>
+
+  </div> <!-- fim content -->
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script>
+    // Alternar menu
+    function toggleMenu() {
+      document.getElementById("sidebar").classList.toggle("close");
+    }
+
+    // Login / Registro
+    let users = JSON.parse(localStorage.getItem("users")) || {};
+
+    document.getElementById("formLogin").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let user = document.getElementById("user").value;
+      let pass = document.getElementById("pass").value;
+
+      if(users[user] && users[user] === pass){
+        document.getElementById("login").style.display = "none";
+      } else {
+        alert("❌ Usuário ou senha incorretos");
+      }
+    });
+
+    document.getElementById("formRegister").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let newUser = document.getElementById("newUser").value;
+      let newPass = document.getElementById("newPass").value;
+
+      if(users[newUser]){
+        alert("⚠️ Usuário já existe!");
+      } else {
+        users[newUser] = newPass;
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("✅ Conta criada! Agora faça login.");
+        document.getElementById("formRegister").style.display = "none";
+        document.getElementById("formLogin").style.display = "block";
+      }
+    });
+
+    document.getElementById("showRegister").onclick = () => {
+      document.getElementById("formLogin").style.display = "none";
+      document.getElementById("formRegister").style.display = "block";
+    };
+    document.getElementById("showLogin").onclick = () => {
+      document.getElementById("formRegister").style.display = "none";
+      document.getElementById("formLogin").style.display = "block";
+    };
+
+    // Feedback
+    document.getElementById("formFeedback").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let nome = document.getElementById("nome").value;
+      let mensagem = document.getElementById("mensagem").value;
+      document.getElementById("resposta").innerText = "✅ Obrigado " + nome + "! Feedback enviado.";
+      document.getElementById("formFeedback").reset();
+    });
+  </script>
+
+</body>
+</html>
